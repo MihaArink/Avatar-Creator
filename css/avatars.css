@@ -1,0 +1,119 @@
+body{
+	font-family: 'Open Sans', arial, sans-serif;
+}
+
+.drawing {
+    min-height: 500px;
+    position: relative;
+    background: #f0f0f0;
+    margin: 20px 10px;
+}
+
+.avatars {
+	width: 200px;
+	float: left;
+}
+
+.drawing-editor {
+	float: left;
+}
+
+.avatars .avatar {
+    width: 80px;
+    float: left;
+    padding: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.avatars .avatar p {
+	width: 80px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    
+}
+
+.avatars .avatar:hover, 
+.avatar-selected {
+	background-color: #ddd
+}
+
+.avatar-big {
+	background-color: #ddd;
+	width: 400px;
+	height: 500px;
+	margin: 70px 0 0 70px;
+	padding: 10px 0 0 0;
+	
+}
+
+.avatar-big .avatar {
+	position: relative;
+	width: 400px;
+	height: 500px;
+}
+
+.avatar-big .avatar p {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	width: 400px;
+	text-align: center;
+}
+
+.avatar-big .highlight, 
+.avatar-big .img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 400px;
+	height: 400px;
+}
+
+.avatar-big .highlight {
+	z-index: 1;
+}
+
+.clearfix {
+    *zoom:1;
+}
+.clearfix:before,
+.clearfix:after{
+    content:" ";
+    display:table;
+}
+.clearfix:after{
+    clear:both;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
+}
+
+/* svg */
+
+.avatar-big .highlight svg {
+	fill-opacity: 0.0;	
+}
+.avatar-big .highlight {
+	pointer-events: none; 	
+}
+
+.avatar-big .img svg .bodypart-selected,
+.avatar-big .img svg .hover {
+	stroke: black;
+	stroke-width: 1px;
+	width: 105%;
+	cursor: pointer;
+}
+.avatar-big .highlight svg .bodypart-selected,
+.avatar-big .highlight .hover {
+	stroke: white;
+	stroke-width: 0.5px;
+	width: 105%;
+}
+
+
