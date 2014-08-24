@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
 	var SEL_AVATAR = ".avatars .avatar";
 	var ASSET_DIR = "svg/";
 	var $currentSelectedAvatar;
-	var $currentSelectedBodyPart;
+	var currentSelectedBodyPart;
 
 	var avatars= [
 	{
@@ -50,58 +50,42 @@ jQuery(document).ready(function ($) {
 		}
 	};
 	
-	var selectBodyPart = function($bodyPart) {	
-		deselectBodyPart($currentSelectedBodyPart);	
-		//svgAddClass($bodyPart, "bodypart-selected");
-		highlightPath($bodyPart);
-		$currentSelectedBodyPart = $bodyPart;
+	var selectBodyPart = function(id) {	
+		deselectBodyPart(currentSelectedBodyPart);	
+		highlightPath(id);
+		currentSelectedBodyPart = id;
 	};
 	
-	var deselectBodyPart = function($bodyPart) {
-		if ($bodyPart !== undefined) {
-			//svgRemoveClass($bodyPart, "bodypart-selected");
-			deHighlightPath($bodyPart);
+	var deselectBodyPart = function(id) {
+		if (id !== undefined) {
+			deHighlightPath(id);
 		}
-	};
-	
-	var svgAddClass = function($path, className) {
-		$path.attr('class', function(index, classNames) {
-			return classNames + " " + className;
-		});
-	};
-	
-	var svgRemoveClass = function($path, className) {
-		$path.attr('class', function(index, classNames) {
-			return classNames.replace(className, '');
-		});
 	};
 	
 	$(".drawing").on("click", SEL_AVATAR, function(){
 		selectAvatar($(this));
 	});
 	$(".drawing").on("click", "path", function(){
-		selectBodyPart($(this));
+		selectBodyPart($(this).attr("data-id"));
 	});
 	
-	var highlightPath = function($path) {
-		var id= $path.attr('data-id');
-		$path.closest(".avatar").find("[data-id=" + id + "]").addClass("hover");
+	var highlightPath = function(id) {
+		$(".drawing-editor").find("[data-id=" + id + "]").addClass("hover");
 	}
 	
-	var deHighlightPath = function($path) {
-		var id = $path.attr('data-id');
-		$path.closest(".avatar").find("[data-id=" + id + "]").removeClass("hover");
+	var deHighlightPath = function(id) {
+		$(".drawing-editor").find("[data-id=" + id + "]").removeClass("hover");
 	}
 	
-	$(".drawing").on("mouseover", "path", function() {
-		highlightPath($(this));
+	$(".drawing-editor").on("mouseover", "path", function() {
+		highlightPath($(this).attr("data-id"));
 	});
-	$(".drawing").on("mouseout", "path", function() {
-		var $path = $(this);
-		if ($path.attr("data-id") == $currentSelectedBodyPart.attr("data-id")) {
+	$(".drawing-editor").on("mouseout", "path", function() {
+		var id = $(this).attr("data-id");
+		if (id == currentSelectedBodyPart) {
 			return;
 		}
-		deHighlightPath($path);
+		deHighlightPath(id);
 	});
 	var template = $("#avatar").text();
 	
@@ -117,7 +101,7 @@ jQuery(document).ready(function ($) {
 				var $highlight = $('<div class="highlight"></div>');
 				$highlight.appendTo($(this).closest(".avatar"));
 				$(this).find("svg").clone().appendTo($highlight);
-				selectBodyPart($bodyPart);
+				selectBodyPart($bodyPart.attr("data-id"));
 			}
 		});
 		$avatar.find("p").text(avatarData.name);
