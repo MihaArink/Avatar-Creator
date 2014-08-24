@@ -1,0 +1,33 @@
+.controls,
+.selection {
+	padding:0 12px;
+}
+
+.controls {
+	height: 60px;
+	border-bottom: 1px solid #ddd;
+}
+
+.controls .right {
+	float: right;
+}
+
+.controls > * {
+	line-height: 60px;
+}
+
+.controls > a {
+	padding: 0 12px;
+}
+
+.selection {
+	background-color: white;
+	padding: 20px 0;
+}
+
+.avatars {
+	background-color: #ddd;
+	height: 100px;
+	width: 80%;
+	margin: 0 auto;
+}
